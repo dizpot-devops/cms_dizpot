@@ -5,8 +5,7 @@ abstract class Model
     protected $dbh;
     protected $stmt;
     protected $auth;
-    protected $authorizations;
-    protected $clinic_id;
+
 
 
     public function __construct()
@@ -17,7 +16,6 @@ abstract class Model
             return false;
         }
 
-        $this->authorizations = new Authorization();
 
     }
 
@@ -37,9 +35,7 @@ abstract class Model
     public function updateAuth() {
         $this->auth = (new Auth())->revive();
     }
-    public function getRoles() {
-        return $this->auth->getRoles();
-    }
+
     public function mdbx_query() {
         $args = func_get_args();
         $this->stmt =  $this->dbh->query(...$args); //,$args);
@@ -54,14 +50,7 @@ abstract class Model
     public function lastInsertId() {
         return $this->stmt->insert_id();
     }
-    public function getClinicId()
-    {
-        return $this->auth->getCurrentClinicId();
-    }
-    public function getRoleId()
-    {
-        return $this->auth->getCurrentRoleId();
-    }
+
     public function getUserId()
     {
         return $this->auth->getUserId();

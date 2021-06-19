@@ -6,22 +6,16 @@ class Auth
 
     private $is_authenticated = false;
     private $user_id;
-    private $department;
-    private $departmentName;
     private $first_name;
     private $last_name;
     private $email;
     private $authType = 0;
-    private $authorizations;
-    private $slackId;
+
+
     public function __construct()
     {
-       // $this->authorizations = new Authorization();
-    }
 
-//    public function authorized($code,$emp_dept = NULL,$emp_id = NULL) {
-//        return $this->authorizations->authorized($code,$emp_dept,$emp_id);
-//    }
+    }
     public function updateSession() {
         $info = (new userModel())->getAuthedUserInfo();
         if(!$info) { die("Could not get updated info"); }
@@ -34,12 +28,9 @@ class Auth
     public function setUserInfo($info) {
         $this->setLastName($info["lastName"]);
         $this->setFirstName($info['firstName']);
-        $this->setDepartment($info['department']);
-        $this->setDepartmentName($info['departmentName']);
         $this->setEmail($info['email']);
         $this->setUserId($info['id']);
         $this->setAuthType($info['authType']);
-        $this->setSlackId($info['slackId']);
         $this->setAuthenticated(true);
     }
     public function writeToSession() {
@@ -64,15 +55,7 @@ class Auth
         return $this->is_authenticated;
     }
 
-    public function getDepartment()
-    {
-        return $this->department;
-    }
-    private function setDepartment($department)
-    {
-        $this->department = $department;
-        $this->authorizations->setDepartment($department);
-    }
+
 
 
     public function setAuthenticated(bool $auth) {;
@@ -80,21 +63,8 @@ class Auth
         $this->writeToSession();
     }
 
-    public function getSlackId() {
-        return $this->slackId;
-    }
-    private function setSlackId($id) {
-        $this->slackId = $id;
-    }
-    public function getDepartmentName()
-    {
-        return $this->departmentName;
-    }
 
-    private function setDepartmentName($departmentName)
-    {
-        $this->departmentName = $departmentName;
-    }
+
 
 
     public function getUserId()
@@ -103,7 +73,6 @@ class Auth
     }
     private function setUserId($user_id): void
     {
-        $this->authorizations->setUserId($user_id);
         $this->user_id = $user_id;
     }
     public function getFirstName()
@@ -137,7 +106,6 @@ class Auth
     private function setAuthType($authType)
     {
         $this->authType = $authType;
-        $this->authorizations->setAuthType($authType);
     }
 
 }

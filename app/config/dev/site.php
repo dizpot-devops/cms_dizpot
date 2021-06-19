@@ -1,6 +1,6 @@
 <?php
 return [
-    'title'=>'DIZployee',
-    'url'=>'http://dizployee.com/',
-    'domain'=>'dizployee.com'
+    'title'=>'CMS',
+    'url'=>'http://cms.com/',
+    'domain'=>'cms.com'
 ];

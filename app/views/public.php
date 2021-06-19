@@ -1,1 +1,1 @@
-<?php
+<?php require($view); ?>
