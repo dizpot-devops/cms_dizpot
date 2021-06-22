@@ -21,6 +21,7 @@ if(!$DIZAUTH->isAuthenticated()) {
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="/assets/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-colorpicker.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -30,6 +31,8 @@ if(!$DIZAUTH->isAuthenticated()) {
     <link rel="shortcut icon" href="/assets/images/favicon.png" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/assets/js/bootstrap-colorpicker.js"></script>
+
 </head>
 <body>
 
