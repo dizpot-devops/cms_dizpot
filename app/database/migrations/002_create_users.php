@@ -6,9 +6,7 @@ return [
         lastName varchar(80),
         email varchar(80) UNIQUE,
         password varchar(80),
-        accessLevel varchar(10),
-        date_created datetime,
-        date_deleted datetime default null,
-        perm_delete_date datetime default null
+        authType varchar(8),
+        codeCreation int default 0
     )'
 ];
