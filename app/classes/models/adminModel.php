@@ -10,4 +10,8 @@ class adminModel extends Model
     public function dashboard() {
 
     }
+
+    public function users() {
+
+    }
 }

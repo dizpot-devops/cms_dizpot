@@ -7,7 +7,9 @@ class admin extends Controller {
         $this->ReturnView($viewmodel->dashboard());
     }
 
-
-
+    protected function users(){
+        $viewmodel = new adminModel();
+        $this->returnView($viewmodel->users());
+    }
 
 }

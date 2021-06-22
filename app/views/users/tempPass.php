@@ -1,29 +1,30 @@
-<form method="post" action="/users/tempPass">
-    <input type="hidden" id="form-submit" value="temp-pass">
+
+<form method="post" action="/users/tempPass" id="pass_reset" accept-charset="UTF-8">
+    <input type="hidden" name="formSubmit" value="tempPass">
+    <input type="hidden" name="utf8" value="✓" />
 
     <label for="tempPass">Temporary Password*:</label><br>
-    <input type="text" id="tempPass" placeholder="" required><br><br>
+    <input type="text" name="tempPass" placeholder="" required><br><br>
 
     <label for="newPass">New Password*:</label><br>
-    <input type="password" id="newPass" placeholder="" required><br><br>
+    <input type="password" name="newPass" placeholder="" required><br><br>
 
     <label for="confirm">Re-enter Password*:</label><br>
-    <input type="password" id="confirm" placeholder="" required><br><br>
+    <input type="password" name="confirm" placeholder="" required><br><br>
 
     <input type="submit" name="Submit" value="Submit"><br>
 </form>
 
 <?php
+$message = $viewmodel;
 
-//check if the temp password matches given temp in email
-
-//when submitted, update the password in database
-
-//check if passwords match
-if (!empty($post['newPass'])) {
-    if ($post['newPass'] != $_POST['confirm'])
-    {
-        echo("Passwords do not match.");
-    }
+if($message == "ccError"){
+    echo "<label>Temp Password is incorrect!</label>";
+}
+elseif ($message == "passError"){
+    echo "<label>The Passwords do not match!</label>";
+}
+elseif ($message == "success"){
+    echo "<label>Password Updated!</label>";
 }
 ?>
