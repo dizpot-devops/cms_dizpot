@@ -11,6 +11,11 @@ class themes extends Controller {
         $this->ReturnView($viewmodel->builder());
     }
 
+    protected function fakebuilder() {
+        $viewmodel = new themeModel();
+        $this->ReturnView($viewmodel->fakebuilder());
+    }
+
 
 
 

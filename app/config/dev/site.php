@@ -1,6 +1,6 @@
 <?php
 return [
     'title'=>'CMS',
-    'url'=>'http://cms.com/',
-    'domain'=>'cms.com'
+    'url'=>'http://local.cms.com/',
+    'domain'=>'local.cms.com'
 ];

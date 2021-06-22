@@ -1,4 +1,4 @@
-<script src="/assets/js/page-builder.js"></script>
+<script src="/assets/js/fakepage-builder.js"></script>
 <style>
     #pageContainer:hover {
         background-color: yellow;
