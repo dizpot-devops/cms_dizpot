@@ -92,7 +92,7 @@ class userModel extends Model
             $confirmPass = $post['confirm'];
         }
 
-        $query = "UPDATE cms_users SET password=? "
+        $query = "UPDATE cms_users SET password=? ";
     }
 }
 
