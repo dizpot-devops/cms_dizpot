@@ -1,5 +1,6 @@
 <script src="/assets/js/fakepage-builder.js"></script>
 <script src="/assets/vendors/dropzone-5.7.0/dist/dropzone.js"></script>
+<script src="/assets/js/diztools.js"></script>
 <style>
     #pageContainer:hover {
         background-color: yellow;
@@ -32,13 +33,7 @@
     .ui-state-highlight { height: 50px; line-height: 1.2em; background-color: grey; }
 </style>
 
-
-
 <script>
-
-
-
-
 
     $( function() {
         $( "#pageContainer" ).sortable({
@@ -68,10 +63,6 @@
 
     } );
 
-
-
-
-
     $(document).ready(function() {
         PBUILD.drawPage();
     });
@@ -93,7 +84,6 @@
         $('#pageContainer').on("click",function(event) {
             event.stopPropagation();
             PBUILD.showControls('page');
-
         });
 
     </script>
@@ -173,11 +163,12 @@
                             <div class="col-4">
                                 Background color:
                             </div>
-                            <div class="col-8">
-                                <input type="color"  data-page-update=true name="page_bg_color" value="#ff0000">
 
-                            </div>
+                            <!-- JavaScript turns this into a colorPicker with text field -->
+                            <div id="colorPicker" name="bgcolor"></div>
+
                         </div>
+
                         <div class="row control_cell_row">
                             <div class="col-4">
                                 Background Image:
@@ -229,4 +220,6 @@
 
     </div>
 </div>
-
+<script>
+    $('#colorPicker').addColorPicker();
+</script>
