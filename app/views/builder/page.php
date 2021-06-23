@@ -1,4 +1,6 @@
-<script src="/assets/js/page-builder.js"></script>
+<script src="/assets/js/fakepage-builder.js"></script>
+<script src="/assets/vendors/dropzone-5.7.0/dist/dropzone.js"></script>
+<script src="/assets/js/diztools.js"></script>
 <style>
     #pageContainer:hover {
         background-color: yellow;
@@ -31,13 +33,7 @@
     .ui-state-highlight { height: 50px; line-height: 1.2em; background-color: grey; }
 </style>
 
-
-
 <script>
-
-
-
-
 
     $( function() {
         $( "#pageContainer" ).sortable({
@@ -58,12 +54,14 @@
             revert: "invalid",
 
         });
+        $( ".mod-draggable" ).draggable({
+            //connectToSortable: "#pageContainer",
+            helper: "clone",
+            revert: "invalid",
+
+        });
 
     } );
-
-
-
-
 
     $(document).ready(function() {
         PBUILD.drawPage();
@@ -116,22 +114,61 @@
                     <div class="col-4" onclick="PBUILD.showSideBar('page-rows-layout')">
                         Rows
                     </div>
+                    <div class="col-4" onclick="PBUILD.showSideBar('page-content-layout')">
+                        Content
+                    </div>
                     <div class="col-4" onclick="PBUILD.showSideBar('page-style-layout')">
                         Style
                     </div>
                 </div>
                 <div class="row">
+                    <div id="page-content-layout" class="col-12 noshow">
+                        <div class="row">
+                            <style>
+                                .module {
+                                    padding:5px;
+                                    margin:2px;
+                                    height:70px;
+                                    width:70px;
+                                    background-color: white;
+                                    border:1px solid red;
+                                }
+                            </style>
+                            <div class="d-flex justify-content-center col-4">
+                                <div class="module d-flex justify-content-center align-items-center mod-draggable"  data-mod-type="text">
+                                    TEXT
+                                </div>
+                            </div>
 
+                            <div class="d-flex justify-content-center col-4">
+                                <div class="module d-flex justify-content-center align-items-center mod-draggable"  data-mod-type="image">
+                                    IMAGE
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center col-4">
+                                <div class="module d-flex justify-content-center align-items-center mod-draggable"  data-mod-type="html">
+                                    HTML
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center col-4">
+                                <div class="module d-flex justify-content-center align-items-center mod-draggable"  data-mod-type="menu">
+                                    MENU
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                     <div id="page-style-layout" class="col-12 noshow">
                         <div class="row control_cell_row">
                             <div class="col-4">
                                 Background color:
                             </div>
-                            <div class="col-8">
-                                <input type="color"  data-page-update=true name="page_bg_color" value="#ff0000">
 
-                            </div>
+                            <!-- JavaScript turns this into a colorPicker with text field -->
+                            <div id="colorPicker" name="bgcolor"></div>
+
                         </div>
+
                         <div class="row control_cell_row">
                             <div class="col-4">
                                 Background Image:
@@ -183,4 +220,7 @@
 
     </div>
 </div>
+<script>
+    $('#colorPicker').addColorPicker();
+</script>
 
