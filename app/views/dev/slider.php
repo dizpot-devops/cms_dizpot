@@ -3,49 +3,42 @@
 
 <div class="boxes2"></div>
 
-<style>
-    #resizable, #also { width: 150px; height: 120px; padding: 0.5em; }
-    #resizable h3, #also h3 { text-align: center; margin: 0; }
-    #resizable{
-        width: 100%;
-        background: #838383;
-        color: white;}
-    #also{
-        width: 100%;
-        background: #123456;
-    }}
-</style>
+<!--<style>-->
+<!--    #resizable, #also { height: 120px; padding: 0.5em; }-->
+<!--    #resizable h3, #also h3 { text-align: center; margin: 0; }-->
+<!--    #resizable{-->
+<!--        width: 100%;-->
+<!--        background: #838383;-->
+<!--        color: white;}-->
+<!--    #also{-->
+<!--        width: 100%;-->
+<!--        background: #123456;-->
+<!--    }}-->
+<!--</style>-->
 
 <script>
-    var divs = [
-        {
-            id:'resizable',
-            width:6
-        },
-        {
-            id:'also',
-            width:6
-        }
-    ];
-
     $.fn.addResizeable = function() {
+        var divs = [
+            {
+                id:'resizable',
+                width:6
+            },
+            {
+                id:'also',
+                width:6
+            }
+        ];
         let row =  $('<div></div>');
         row.attr('class', 'row');
 
         let box1 =  $('<div></div>');
         box1.attr('class', 'col-6');
+        box1.css({"height": "120px", "background": "#838383"});
 
         let box2 =  $('<div></div>');
         box2.attr('class', 'col-6');
+        box2.css({"height": "120px", "background": "#123456"});
 
-        let resizeable = $('<div></div>');
-        resizeable.attr('id', 'resizable')
-
-        let also = $('<div></div>');
-        also.attr('id', 'also');
-
-        box1.append(resizeable);
-        box2.append(also);
         row.append(box1);
         row.append(box2);
 
