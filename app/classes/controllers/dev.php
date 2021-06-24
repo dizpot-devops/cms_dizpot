@@ -7,6 +7,9 @@ class dev extends Controller {
         $this->ReturnView($viewmodel->slider());
     }
 
-
+    public function fontSelecter(){
+        $viewmodel = new devModel();
+        $this->ReturnView($viewmodel->fontSelecter());
+    }
 
 }
