@@ -7,6 +7,9 @@ class media extends Controller {
         $viewmodel->upload();
     }
 
-
+    public function list(){
+        $viewmodel = new mediaModel();
+        $this->ReturnView($viewmodel->list());
+    }
 
 }

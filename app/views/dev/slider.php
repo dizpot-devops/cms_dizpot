@@ -1,124 +1,132 @@
 <?php
 ?>
-
+<!--<head>-->
+<!--<link rel="stylesheet" href="assets/css/fontawesome/css/fontawesome.min.css">-->
+<!--</head>-->
 <div class="boxes2"></div>
-
-<!--<style>-->
-<!--    #resizable, #also { height: 120px; padding: 0.5em; }-->
-<!--    #resizable h3, #also h3 { text-align: center; margin: 0; }-->
-<!--    #resizable{-->
-<!--        width: 100%;-->
-<!--        background: #838383;-->
-<!--        color: white;}-->
-<!--    #also{-->
-<!--        width: 100%;-->
-<!--        background: #123456;-->
-<!--    }}-->
-<!--</style>-->
+<div class="boxes3"></div>
+<div class="boxes5"></div>
+<div class="boxes7"></div>
 
 <script>
-    $.fn.addResizeable = function() {
-        var divs = [
-            {
-                id:'resizable',
-                width:6
-            },
-            {
-                id:'also',
-                width:6
-            }
-        ];
-        let row =  $('<div></div>');
+    $.fn.addResizeable = function(numCol) {
+        let divs = [];
+
+        let row = $('<div></div>');
         row.attr('class', 'row');
+        row.css('padding-bottom', "10px");
 
-        let box1 =  $('<div></div>');
-        box1.attr('class', 'col-6');
-        box1.css({"height": "120px", "background": "#838383"});
+        let ammtPer = (12/numCol) | 0;
+        let remainder = 12 - (ammtPer * numCol);
 
-        let box2 =  $('<div></div>');
-        box2.attr('class', 'col-6');
-        box2.css({"height": "120px", "background": "#123456"});
-
-        row.append(box1);
-        row.append(box2);
-
-        let i = 6;
-        box1.on('click', function(){
-            if(i != 11) {
-                i++;
-                box1.removeClass('col-' + divs[0].width);
-                box1.addClass('col-' + i);
-                divs[0].width = i;
-
-                box2.removeClass('col-' + divs[1].width);
-                box2.addClass('col-' + (12 - i));
-                divs[1].width = (12 - i);
+        for(let i = 0; i < numCol; i++){
+            let amt = ammtPer;
+            if (remainder > 0){
+                amt++;
+                remainder--;
             }
-        })
-        box2.on('click', function(){
-            if(i != 1) {
-                i--;
-                box1.removeClass('col-' + divs[0].width);
-                box1.addClass('col-' + i);
-                divs[0].width = i;
+            divs[i] = {
+                width: amt,
+                box: $('<div></div>').attr('width', amt)
+            };
+        }
 
-                box2.removeClass('col-' + divs[1].width);
-                box2.addClass('col-' + (12 - i));
-                divs[1].width = (12 - i);
+        for(let i = 0; i < numCol; i++){
+            divs[i].box.attr('class', 'col-' + divs[i].width);
+            divs[i].box.attr('id', i);
+            divs[i].box.css({"height": "120px", "background": "#838383", "position": "relative", "text-align": "center"});
+
+            // let ptag = $('<p>hello</p>');
+            // ptag.css({'position': 'absolute', "margin-left": '25px'});
+            // divs[i].box.append(ptag);
+
+            if(i != 0){
+                divs[i].box.prev(divs[i-1].box);
+                let leftSlider = $('<div></div>');
+                leftSlider.css({"height": "120px", "width": "25px", "position": "absolute", "left": "0", 'background-color': 'rgba(0, 0, 255, 0.2)'});
+
+                // let larrow = $('<i></i>');
+                // larrow.addClass('fas fa-arrow-left');
+                // leftSlider.append(larrow);
+
+                let larrow = $('<p><<</p>');
+                larrow.css({'color': '#0000FF', "text-align": "left"});
+                leftSlider.append(larrow);
+
+                leftSlider.on('click', function(){
+                    let box1 = $(this).parent();
+                    let box2 = box1.prev();
+                    let box1W = box1.attr('width');
+                    let box2W = box2.attr('width');
+
+                    if(box2W == 1 && box2.attr('id') != 0){
+                        while(true){
+                            box2 = box2.prev();
+                            box2W = box2.attr('width');
+                            if(box2W != 1 || box2.attr('id') == 0)
+                                break;
+                        }
+                    }
+                    if(box2W != 1) {
+                        box1.removeClass('col-' + box1W);
+                        box1W++;
+                        box1.attr('width', box1W);
+                        box1.addClass('col-' + box1W);
+                        // divs[id].box.innerHTML = i;
+                        box2.removeClass('col-' + box2W);
+                        box2W--;
+                        box2.attr('width', box2W);
+                        box2.addClass('col-' + box2W);
+                        // divs[id].box.innerHTML = (12-i);
+                    }
+                })
+                divs[i].box.append(leftSlider);
             }
-        })
+            if(i != (numCol-1)){
+                divs[i].box.next(divs[i+1].box);
+                let rightSlider = $('<div></div>');
+                rightSlider.css({"height": "120px", "width": "25px", "position": "absolute", "right": "0", 'background-color': 'rgba(255, 0, 0, 0.2)'});
+                rightSlider.attr('id', i);
 
+                let rarrow = $('<p>>></p>');
+                rarrow.css({'color': '#f00', "text-align": "right"});
+                rightSlider.append(rarrow);
+
+                rightSlider.on('click', function(){
+                    let box1 = $(this).parent();
+                    let box2 = box1.next();
+                    let box1W = box1.attr('width');
+                    let box2W = box2.attr('width');
+
+                    if(box2W == 1 && box2.attr('id') != numCol-1){
+                        while(true){
+                            box2 = box2.next();
+                            box2W = box2.attr('width');
+                            if(box2W != 1 || box2.attr('id') == numCol-1)
+                                break;
+                        }
+                    }
+                    if(box2W != 1) {
+                        box1.removeClass('col-' + box1W);
+                        box1W++;
+                        box1.attr('width', box1W);
+                        box1.addClass('col-' + box1W);
+                        // divs[id].box.innerHTML = i;
+                        box2.removeClass('col-' + box2W);
+                        box2W--;
+                        box2.attr('width', box2W);
+                        box2.addClass('col-' + box2W);
+                        // divs[id].box.innerHTML = (12-i);
+                    }
+                })
+                divs[i].box.append(rightSlider);
+            }
+            row.append(divs[i].box);
+        }
         $(this).append(row);
-
-
-        // $( "#resizable" ).resizable({
-        //     // alsoResize: "#also",
-        //     grid: 12,
-        //     resize:function(event, ui) {
-        //         var newsize = ui.size; //current size
-        //         var available = 12 - newsize; //col- size left
-        //
-        //         // for(var i=0; i < divs.length; i++) {
-        //         //     if(ui.id == divs[i].id) {continue;}
-        //         //     $('#' + divs[i].id).removeClass('col-' + divs[i].width);
-        //         //     $('#' + divs[i].id).addClass('col-' + available);
-        //         //     divs[i].width = available;
-        //         // }
-        //         $('#' + divs[0].id).removeClass('col-' + divs[0].width);
-        //         $('#' + divs[0].id).addClass('col-' + newsize);
-        //         divs[0].width = newsize;
-        //
-        //         $('#' + divs[1].id).removeClass('col-' + divs[1].width);
-        //         $('#' + divs[1].id).addClass('col-' + available);
-        //         divs[1].width = available;
-        //
-        //
-        //     }
-        // });
-        //
-        // $( "#also" ).resizable({
-        //     grid: 12
-        // });
-
     };
-
-    $('.boxes2').addResizeable();
+    $('.boxes2').addResizeable(2);
+    $('.boxes3').addResizeable(3);
+    $('.boxes5').addResizeable(5);
+    $('.boxes7').addResizeable(7);
 </script>
-
-
-<!--<div class="row">-->
-<!---->
-<!--    <div class="col-6">-->
-<!--        <div id="resizable" >-->
-<!--            <h3 >Resize</h3>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="col-6">-->
-<!--        <div id="also">-->
-<!--            <h3>will also resize</h3>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--</div>-->
-

@@ -1,10 +1,9 @@
 <?php
 return [
-    'create table media (
+    'create table media_mapper (
         id int auto_increment primary key,
-        title text,
-        type text,
-        path text,
+        mediaId int,
+        used text,
         dateAdded datetime default null,
         dateDeleted datetime default null
     )'

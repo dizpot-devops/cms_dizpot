@@ -7,13 +7,14 @@ class mediaModel extends Model
     public function upload()
     {
         $post = filter_input_array(INPUT_POST);
+
 //    $category = $post['category'];
 //    $tag = $post['tag'];
-//    $dir = isset($post['dir']) ? $post['dir'] : '';
+        $dir = isset($post['dir']) ? $post['dir'] : '';
 
         $tag = isset($post['tag']) ? "-" . $post['tag'] : '';
-        $dir = '';
-      $public_dir = "/media/" . $dir;
+        //$dir = '';
+      $public_dir = "/assets/images/" . $dir;
       $uploaddir = __DIR__ . '/../../../public/' . $public_dir;
 
 
@@ -34,13 +35,18 @@ class mediaModel extends Model
 
         }
       else {
-            echo "Possible file upload attack!\n";
+            echo "Possible file upload attack!\n" . $_FILES['file']['error'];
         }
     }
 
 
     public function insert($title,$type,$path) {
-        $this->mdbx_query("INSERT INTO media (title,type,path) VALUES (?,?,?)",$title,$type,$path);
+        $this->mdbx_query("INSERT INTO media (title,type,path,dateAdded) VALUES (?,?,?,NOW())",$title,$type,$path);
         return $this->lastInsertId();
+    }
+
+    public function list(){
+        $this->mdbx_query("SELECT * FROM media WHERE dateDeleted is null");
+        return $this->resultSet();
     }
 }

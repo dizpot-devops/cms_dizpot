@@ -50,6 +50,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-diztemplates" aria-expanded="false" aria-controls="ui-dizpasswords">
                 <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
@@ -59,6 +60,19 @@
             <div class="collapse" id="ui-diztemplates">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="/templates/list/">List</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-dizMedia" aria-expanded="false" aria-controls="ui-dizpasswords">
+                <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
+                <span class="menu-title">Media</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-dizMedia">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/media/list/">List</a></li>
                 </ul>
             </div>
         </li>
